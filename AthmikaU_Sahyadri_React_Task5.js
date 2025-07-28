@@ -66,6 +66,11 @@ let books = [
   { id: 2, title: 'Deep Work', author: 'Cal Newport' },
 ];
 
+// root route – Welcome message
+app.get('/', (req, res) => {
+  res.send('Welcome to the Book Management API – Use /books to get started!');
+});
+
 // GET all books
 app.get('/books', (req, res) => {
   res.json(books);
