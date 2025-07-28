@@ -283,36 +283,65 @@ Verify that each request is logged correctly with all required info.
 
 ## Deployment
 
-### Pre-Deployment Checklist
+The Express application was deployed to [Render](https://render.com) as a Web Service (free plan).
 
-- Ensure logging middleware is loaded before route handlers
-- Add `logs/` to `.gitignore`
-- Set correct file permissions for logs
-- Use environment variables for log config (if extended)
+- The middleware logs request information to a file located at `logs/requests.log`.
+- The log file path is resolved using `path.join(__dirname, 'logs', 'requests.log')` to ensure cross-platform compatibility.
+- The server listens on `process.env.PORT || 3000` to support dynamic port assignment during production.
 
-### Deployment Options
+**Live URL**: [https://athmikau-sahyadri-react-task5.onrender.com](https://athmikau-sahyadri-react-task5.onrender.com)
 
-- Cloud platforms like Render, Railway, Vercel (use file-based logs cautiously)
 
----
+## Available Endpoints
 
-## Monitoring and Post-Deployment Checks
+| Method | Endpoint      | Description                  |
+|--------|---------------|------------------------------|
+| [GET](https://athmikau-sahyadri-react-task5.onrender.com)    | `/`           | Welcome Message (root route) |         |
+| POST   | `/books`      | Adds a new book              |
+| [GET](https://athmikau-sahyadri-react-task5.onrender.com/books)    | `/books`      | Lists all books              |
+| [GET](https://athmikau-sahyadri-react-task5.onrender.com/books/1)    | `/books/:id`  | Fetch book by ID             |
+| PUT    | `/books/:id`  | Updates book by ID           |
+| [DELETE](https://athmikau-sahyadri-react-task5.onrender.com/books/2) | `/books/:id`  | Deletes book by ID           |
 
-After deployment:
 
-- **Confirm**: Requests are being logged in production
-- **Monitor**: Log file size, frequency of writes
-- **Ensure**: No slowdown due to synchronous logging
+## Monitoring & Post-Deployment Checks
 
+- **Log Verification**: Log file `requests.log` can be checked from the **Shell** tab in the Render dashboard.
+  
+  - Go to your Render service → **Shell** tab → Run:
+    ```bash
+    cat logs/requests.log
+    ```
+⚠️ `Note:` Render's Free Plan does **not provide Shell access**, so `requests.log` cannot be accessed directly.
+
+### Recommended Logging for Free Plan:
+
+- Modify middleware to also log to console:
+  ```js
+  console.log(`${timestamp} ${method} ${url} ${statusCode}`);
+  ```
+  Visit the Logs tab of Render service to view live request logs.
+  
+- **Performance Check**:
+  - Verified that logging does not delay or block responses.
+  - Middleware runs before route handlers to capture every request efficiently.
+
+-  **Production Readiness**:
+   - No database used, so deployment focuses on request handling.
+   - Suitable for environments without persistent backend connections.
+     
 ---
 
 ## Summary
 
-This middleware helps capture and persist detailed request logs to support monitoring, debugging, and audit tracking in Book Management Application.
+This middleware helps capture and persist detailed request logs to support monitoring, debugging, and audit tracking in the Book Management Application.
 
-- Developed with minimal dependencies  
-- Tested across all HTTP verbs  
-- Ready for production deployment
+- Developed using custom Express middleware with minimal dependencies  
+- Captures method, URL, timestamp, and status code
+- Logs are written to `logs/requests.log` using Node's native `fs` module  
+- Compatible with both development and production environments  
+- Tested across all HTTP verbs (`GET`, `POST`, `PUT`, `DELETE`, etc.)  
+- Ensures consistent logging even when errors occur
 
 ---
 
