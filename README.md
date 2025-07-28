@@ -18,8 +18,8 @@ This is a simple Book Management API built using **Node.js** and **Express**. It
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/AthmikaU/MatreComm-React_Task5.git
-cd MatreComm-React_Task5
+git clone https://github.com/AthmikaU/AthmikaU_Sahyadri_React_Task5.git
+cd AthmikaU_Sahyadri_React_Task5
 ```
 
 ### 2. Install Dependencies
