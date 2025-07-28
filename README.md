@@ -301,7 +301,7 @@ The Express application was deployed to [Render](https://render.com) as a Web Se
 | [GET](https://athmikau-sahyadri-react-task5.onrender.com/books)    | `/books`      | Lists all books              |
 | [GET](https://athmikau-sahyadri-react-task5.onrender.com/books/1)    | `/books/:id`  | Fetch book by ID             |
 | PUT    | `/books/:id`  | Updates book by ID           |
-| [DELETE](https://athmikau-sahyadri-react-task5.onrender.com/books/2) | `/books/:id`  | Deletes book by ID           |
+| DELETE | `/books/:id`  | Deletes book by ID           |
 
 
 ## Monitoring & Post-Deployment Checks
